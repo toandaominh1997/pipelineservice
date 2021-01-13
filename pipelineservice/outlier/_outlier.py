@@ -1,3 +1,5 @@
+import numpy as np
+import pandas as pd
 import pyod
 from imblearn.over_sampling import SMOTE
 
@@ -19,6 +21,7 @@ class Outlier(SMOTE):
         if 'pca' in self.methods:
             pca = pyod.models.pca.PCA(contamination=self.contamination)
             self.outlier.append(pca)
+
     def _fit_resample(self, X, y = None):
         X = X.copy()
         if y is not None:
