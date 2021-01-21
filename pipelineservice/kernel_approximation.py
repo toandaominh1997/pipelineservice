@@ -6,5 +6,5 @@ class polynomialCountSketch(PolynomialCountSketch):
     feature_name = 'pcsketch'
     def transform(self, X):
         data = super().transform(X)
-        cols = [f'{cls.feature_name}_{i}' for i in range(data.shape[1])]
+        cols = [f'{self.feature_name}_{i}' for i in range(data.shape[1])]
         return pd.DataFrame(data, columns = cols, index = X.index)
