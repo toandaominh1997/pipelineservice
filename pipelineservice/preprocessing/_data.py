@@ -14,11 +14,12 @@ class polynomialFeatures(PolynomialFeatures):
 class removeDuplicate(BaseEstimator, TransformerMixin):
     def __init__(self):
         super().__init__()
+        self.unique_indices_
     def fit(self, X, y = None):
-        _, self.unique_indices = np.unique(X, axis=1, return_index=True)
+        _, self.unique_indices_ = np.unique(X, axis=1, return_index=True)
         return self
     def transform(self, X, y = None):
-        return X.iloc[:, self.unique_indices]
+        return X.iloc[:, self.unique_indices_]
 
 class standardScaler(StandardScaler):
     def transform(self, X):
