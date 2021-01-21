@@ -14,7 +14,7 @@ class polynomialFeatures(PolynomialFeatures):
 class removeDuplicate(BaseEstimator, TransformerMixin):
     def __init__(self):
         super().__init__()
-        self.unique_indices_
+        self.unique_indices_ = None
     def fit(self, X, y = None):
         _, self.unique_indices_ = np.unique(X, axis=1, return_index=True)
         return self
