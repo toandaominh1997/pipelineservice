@@ -1,0 +1,1 @@
+from ._discretisation import equalFrequencyDiscretiser, equalWidthDiscretiser, decisionTreeDiscretiser
