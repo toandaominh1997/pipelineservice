@@ -1,6 +1,13 @@
 import numpy as np
 import pandas as pd
-from sklearn.decomposition import PCA, FastICA, KernelPCA, TruncatedSVD, IncrementalPCA, LatentDirichletAllocation, MiniBatchDictionaryLearning, MiniBatchSparsePCA, NMF, SparsePCA, SparseCoder
+from sklearn.decomposition import PCA, FastICA, KernelPCA, TruncatedSVD, IncrementalPCA, LatentDirichletAllocation, MiniBatchDictionaryLearning, MiniBatchSparsePCA, NMF, SparsePCA, SparseCoder, FactorAnalysis
+
+class factorAnalysis(FactorAnalysis):
+    feature_name = 'factoranalysis'
+    def transform(self, X):
+        data = super().transform(X)
+        cols = [f'{self.feature_name}_{i}' for i in range(data.shape[1])]
+        return pd.DataFrame(data, columns = cols, index = X.index)
 
 
 class pCA(PCA):
