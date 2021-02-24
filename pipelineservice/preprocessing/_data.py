@@ -44,7 +44,7 @@ class kBinsDiscretizer(KBinsDiscretizer):
     def transform(self, X):
         data = super().transform(X)
         return pd.DataFrame(dapa, columns = X.columns, index = X.index)
-class KernelCenterer(KernelCenterer):
+class kernelCenterer(KernelCenterer):
     def transform(self, X):
         data = super().transform(X)
         return pd.DataFrame(dapa, columns = X.columns, index = X.index)
