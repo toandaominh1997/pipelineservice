@@ -1,2 +1,2 @@
-from ._base import simpleImputer
+from ._base import simpleImputer, kNNImputer
 
