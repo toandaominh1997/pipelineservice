@@ -15,9 +15,11 @@ class Explained(object):
         self.y = y
     def get_estimator(self):
         try:
-            return self.pipeline[-1]
+            pipeline = self.pipeline[-1]
         except:
-            return self.pipeline
+            pipeline =  self.pipeline
+        sklearn.utils.validation.check_is_fitted(pipeline)
+        return pipeline
     def get_xtransform(self):
         try:
             X_transform = self.pipeline[:-1].transform(self.X)
@@ -51,8 +53,8 @@ class Explained(object):
 
     def get_permutation_importance(self, n_jobs = -1, **kwargs):
 
-        permutation = permutation_importance(estimator = self.pipeline,
-                                                         X = self.X,
+        permutation = permutation_importance(estimator = self.get_estimator(),
+                                                         X = self.get_xtransform(),
                                                          y = self.y,
                                                          n_jobs = n_jobs,
                                                          **kwargs
@@ -75,13 +77,16 @@ class Explained(object):
         return facegrid.ax
     def plot_partial_dependence(self,
                                 features,
+                                n_jobs = -1,
                                 **kwargs):
         fig = plot_partial_dependence(estimator = self.get_estimator(),
                                       X = self.get_xtransform(),
-                                      features = features
+                                      features = features,
+                                      n_jobs = n_jobs,
+                                      **kwargs
                                      )
         return fig
-    def shapley_importance(self):
+    def plot_shap_importance(self):
         explainer = shap.TreeExplainer(self.get_estimator())
         shap_values = explainer.shap_values(self.get_xtransform())
         return shap.summary_plot(shap_values, self.get_xtransform(), plot_type = "bar")
