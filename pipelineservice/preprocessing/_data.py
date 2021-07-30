@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import PolynomialFeatures, QuantileTransformer, PowerTransformer, KBinsDiscretizer, KernelCenterer
-from sklearn.preprocessing import StandardScaler, RobustScaler
+from sklearn.preprocessing import StandardScaler, RobustScaler, LabelEncoder, MinMaxScaler
 
 class polynomialFeatures(PolynomialFeatures):
     def transform(self, X):
@@ -30,7 +30,15 @@ class robustScaler(RobustScaler):
         data = super().transform(X)
         return pd.DataFrame(data, columns = X.columns, index = X.index)
 
+class minMaxScaler(MinMaxScaler):
+    def transform(self, X):
+        data = super().transform(X)
+        return pd.DataFrame(data, columns = X.columns, index = X.index)
 
+class labelEncoder(LabelEncoder):
+    def transform(self, X):
+        data = super().transform(X)
+        return pd.DataFrame(data, columns = X.columns, index = X.index)
 
 class quantileTransformer(QuantileTransformer):
     def transform(self, X):
