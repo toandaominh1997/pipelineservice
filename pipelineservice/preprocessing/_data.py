@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import PolynomialFeatures, QuantileTransformer, PowerTransformer, KBinsDiscretizer, KernelCenterer
-from sklearn.preprocessing import StandardScaler, RobustScaler, LabelEncoder, MinMaxScaler
+from sklearn.preprocessing import StandardScaler, RobustScaler, LabelEncoder, MinMaxScaler, OrdinalEncoder
 
 class polynomialFeatures(PolynomialFeatures):
     def transform(self, X):
@@ -35,6 +35,10 @@ class minMaxScaler(MinMaxScaler):
         data = super().transform(X)
         return pd.DataFrame(data, columns = X.columns, index = X.index)
 
+class ordinalEncoder(OrdinalEncoder):
+    def transform(self, X):
+        data = super().transform(X)
+        return pd.DataFrame(data, columns = X.columns, index = X.index)
 class labelEncoder(LabelEncoder):
     def transform(self, X):
         data = super().transform(X)
